@@ -11,9 +11,11 @@ import java.util.List;
 public class Employe {
     @Id
     private ObjectId id;
+    private String username;
     private String nom;
     private String prenom;
     private int age;
+    private String CIN;
     private Date date_naissance;
     private String sexe;
     private Adresse adresse;
@@ -46,6 +48,14 @@ public class Employe {
         this.id = id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getNom() {
         return nom;
     }
@@ -68,6 +78,14 @@ public class Employe {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getCIN() {
+        return CIN;
+    }
+
+    public void setCIN(String CIN) {
+        this.CIN = CIN;
     }
 
     public Date getDate_naissance() {

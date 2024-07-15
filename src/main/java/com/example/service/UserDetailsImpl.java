@@ -13,13 +13,13 @@ public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private ObjectId id;
-    private String email;
+    private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(ObjectId id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(ObjectId id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.authorities = authorities;
     }
@@ -28,7 +28,7 @@ public class UserDetailsImpl implements UserDetails {
         List<GrantedAuthority> authorities = List.of(); // Customize as needed
         return new UserDetailsImpl(
                 employe.getId(),
-                employe.getEmail(),
+                employe.getUsername(),
                 employe.getMot_de_passe(),
                 authorities);
     }
@@ -44,7 +44,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

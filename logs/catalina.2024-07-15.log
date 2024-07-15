@@ -1,0 +1,61 @@
+15-Jul-2024 09:45:37.673 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Nom version serveur :              Apache Tomcat/9.0.90
+15-Jul-2024 09:45:37.693 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Serveur compilé :                  Jun 14 2024 14:45:13 UTC
+15-Jul-2024 09:45:37.694 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Version du serveur :               9.0.90.0
+15-Jul-2024 09:45:37.694 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Nom de l'OS :                      Windows 10
+15-Jul-2024 09:45:37.694 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Version OS :                       10.0
+15-Jul-2024 09:45:37.694 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture :                     amd64
+15-Jul-2024 09:45:37.695 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home :                        C:\Program Files\Java\jdk-19
+15-Jul-2024 09:45:37.695 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Version JVM :                      19.0.2+7-44
+15-Jul-2024 09:45:37.695 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Fournisseur de la JVM :            Oracle Corporation
+15-Jul-2024 09:45:37.696 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE :                    C:\Users\user\Desktop\appSpringboot
+15-Jul-2024 09:45:37.696 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME :                    C:\Program Files\Apache Software Foundation\Tomcat 9.0
+15-Jul-2024 09:45:37.725 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : --add-opens=java.base/java.lang=ALL-UNNAMED
+15-Jul-2024 09:45:37.725 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : --add-opens=java.base/java.io=ALL-UNNAMED
+15-Jul-2024 09:45:37.727 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : --add-opens=java.base/java.util=ALL-UNNAMED
+15-Jul-2024 09:45:37.729 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+15-Jul-2024 09:45:37.731 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+15-Jul-2024 09:45:37.731 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.home=C:\Program Files\Apache Software Foundation\Tomcat 9.0
+15-Jul-2024 09:45:37.731 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.base=C:\Users\user\Desktop\appSpringboot
+15-Jul-2024 09:45:37.732 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.io.tmpdir=C:\Users\user\Desktop\appSpringboot\temp
+15-Jul-2024 09:45:37.732 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.config.file=C:\Users\user\Desktop\appSpringboot\conf\logging.properties
+15-Jul-2024 09:45:37.732 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+15-Jul-2024 09:45:37.734 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.1.4\lib\idea_rt.jar=50918:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.1.4\bin
+15-Jul-2024 09:45:37.735 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dfile.encoding=UTF-8
+15-Jul-2024 09:45:37.735 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dsun.stdout.encoding=UTF-8
+15-Jul-2024 09:45:37.735 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dsun.stderr.encoding=UTF-8
+15-Jul-2024 09:45:37.760 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent La librairie Apache Tomcat Native basée sur APR qui permet des performances optimales dans les environnements de production n'a pas été trouvée sur le java.library.path : [C:\Program Files\Java\jdk-19\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Python312\Scripts\;C:\Program Files\Python312\;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\oracle_19c\WINDOWS.X64_193000_db_home\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin;"C:\Program Files (x86)\Microchip\MPLAB IDE\VDI;C:\Program Files\Java\jdk-19\bin";C:\ProgramData\chocolatey\bin;C:\Program Files\Oracle\VirtualBox;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\hadoop\bin;C:\Users\user\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Java\jdk-19\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\Program Files\Apache Software Foundation\apache-maven-3.9.8-bin\apache-maven-3.9.8\bin;C:\Users\user\AppData\Local\Microsoft\WindowsApps;C:\Users\user\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.1.4\bin;;C:\Users\user\PycharmProjects\tp3\venv\Lib\site-packages\pip\_internal\vcs\git.py;C:\Users\user\AppData\Roaming\Composer\vendor\bin;C:\Users\user\.dotnet\tools;C:\Users\user\AppData\Local\Programs\mongosh\;C:\Users\user\AppData\Roaming\npm;.]
+15-Jul-2024 09:45:39.204 INFO [main] org.apache.coyote.AbstractProtocol.init Initialisation du gestionnaire de protocole ["http-nio-8080"]
+15-Jul-2024 09:45:39.259 SEVERE [main] org.apache.catalina.util.LifecycleBase.handleSubClassException Echec d'initialisation du composant [Connector["http-nio-8080"]]
+	org.apache.catalina.LifecycleException: L'initialisation du gestionnaire de protocole a échoué
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1012)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:122)
+		at org.apache.catalina.core.StandardService.initInternal(StandardService.java:525)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:122)
+		at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:990)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:122)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:686)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:709)
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:302)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:472)
+	Caused by: java.net.BindException: Address already in use: bind
+		at java.base/sun.nio.ch.Net.bind0(Native Method)
+		at java.base/sun.nio.ch.Net.bind(Net.java:555)
+		at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:344)
+		at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:301)
+		at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:268)
+		at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:223)
+		at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1371)
+		at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1384)
+		at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:662)
+		at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:75)
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1010)
+		... 11 more
+15-Jul-2024 09:45:39.263 INFO [main] org.apache.catalina.startup.Catalina.load L'initialisation du serveur a pris [2165] millisecondes
+15-Jul-2024 09:45:39.473 INFO [main] org.apache.catalina.core.StandardService.startInternal Démarrage du service [Catalina]
+15-Jul-2024 09:45:39.474 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Démarrage du moteur de Servlets : [Apache Tomcat/9.0.90]
+15-Jul-2024 09:45:39.521 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor Déploiement du descripteur de configuration [C:\Users\user\Desktop\appSpringboot\conf\Catalina\localhost\demo.xml]
+15-Jul-2024 09:45:43.063 WARNING [main] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Version [5.0] inconnue, utilisation de la version par défaut
+15-Jul-2024 09:45:43.106 WARNING [main] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Version [6.0] inconnue, utilisation de la version par défaut
+15-Jul-2024 09:45:43.264 WARNING [main] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Version [6.0] inconnue, utilisation de la version par défaut

@@ -6,14 +6,12 @@ import java.util.List;
 public class JwtResponse {
     private String token;
     private String id;
-    private String email;
-    private List<String> roles;
+    private String username;
 
-    public JwtResponse(String token, String id, String email, List<String> roles) {
+    public JwtResponse(String token, String id, String username) {
         this.token = token;
         this.id = id;
-        this.email = email;
-        this.roles = roles;
+        this.username = username;
     }
 
     // Getters and Setters
@@ -34,19 +32,12 @@ public class JwtResponse {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username= username;
     }
 
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
 }
