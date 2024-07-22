@@ -3,53 +3,48 @@ package com.example.service;
 import com.example.resources.Employe;
 import org.bson.types.ObjectId;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.Collections;
 
 public class UserDetailsImpl implements UserDetails {
-    private static final long serialVersionUID = 1L;
-
     private ObjectId id;
     private String username;
     private String password;
-    private Collection<? extends GrantedAuthority> authorities;
+    private GrantedAuthority authority;
 
-    public UserDetailsImpl(ObjectId id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(ObjectId id, String username, String password, GrantedAuthority authority) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.authorities = authorities;
+        this.authority = authority;
     }
 
     public static UserDetailsImpl build(Employe employe) {
-        List<GrantedAuthority> authorities = List.of(); // Customize as needed
+        GrantedAuthority authority = new SimpleGrantedAuthority(employe.getRole());
+
         return new UserDetailsImpl(
                 employe.getId(),
                 employe.getUsername(),
                 employe.getMot_de_passe(),
-                authorities);
+                authority);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
+        return Collections.singleton(authority);
     }
 
     @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
     }
 
     @Override
@@ -72,16 +67,11 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserDetailsImpl user = (UserDetailsImpl) o;
-        return Objects.equals(id, user.id);
+    public ObjectId getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public String getRole() {
+        return authority.getAuthority();
     }
 }

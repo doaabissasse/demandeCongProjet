@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,6 +26,7 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/signin")
@@ -41,18 +40,18 @@ public class AuthController {
             String jwt = jwtUtils.generateJwtToken(authentication);
 
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-            List<String> roles = userDetails.getAuthorities().stream()
+            String role = userDetails.getAuthorities().stream()
                     .map(item -> item.getAuthority())
-                    .collect(Collectors.toList());
+                    .collect(Collectors.joining(","));
 
             return ResponseEntity.ok(new JwtResponse(jwt,
                     userDetails.getId().toString(),
-                    userDetails.getUsername()));
+                    userDetails.getUsername(),
+                    role));
         } catch (Exception e) {
             logger.error("Authentification échouée: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
-
-
 }
+

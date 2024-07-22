@@ -14,7 +14,6 @@ public class Employe {
     private String username;
     private String nom;
     private String prenom;
-    private int age;
     private String CIN;
     private Date date_naissance;
     private String sexe;
@@ -26,16 +25,26 @@ public class Employe {
     private Date date_embauche;
     private int salaire;
     private String mot_de_passe;
+    private String role; // Ajouter le rôle ici
     private SoldeConges solde_conges;
-    private List<Conges> conges;
 
-    public Employe(String nom, String prenom, String email, String mot_de_passe) {
+    // Constructeurs, getters, et setters
+    public Employe(String nom, String prenom, String email, String mot_de_passe, String role) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.mot_de_passe = mot_de_passe;
+        this.role = role; // Initialiser le rôle
     }
 
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
 
 
@@ -72,13 +81,6 @@ public class Employe {
         this.prenom = prenom;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public String getCIN() {
         return CIN;
@@ -176,14 +178,6 @@ public class Employe {
         this.solde_conges = solde_conges;
     }
 
-    public List<Conges> getConges() {
-        return conges;
-    }
-
-    public void setConges(List<Conges> conges) {
-        this.conges = conges;
-    }
-
     // Classes Adresse, Conges, et SoldeConges
     public static class Adresse {
         private String rue;
@@ -222,46 +216,6 @@ public class Employe {
 
         public void setPays(String pays) {
             this.pays = pays;
-        }
-    }
-
-    public static class Conges {
-        private String type;
-        private Date date_debut;
-        private Date date_fin;
-        private String statut;
-
-        // Getters et setters
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public Date getDate_debut() {
-            return date_debut;
-        }
-
-        public void setDate_debut(Date date_debut) {
-            this.date_debut = date_debut;
-        }
-
-        public Date getDate_fin() {
-            return date_fin;
-        }
-
-        public void setDate_fin(Date date_fin) {
-            this.date_fin = date_fin;
-        }
-
-        public String getStatut() {
-            return statut;
-        }
-
-        public void setStatut(String statut) {
-            this.statut = statut;
         }
     }
 

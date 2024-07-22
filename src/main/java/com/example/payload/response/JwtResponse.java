@@ -1,4 +1,3 @@
-// JwtResponse.java
 package com.example.payload.response;
 
 import java.util.List;
@@ -7,11 +6,13 @@ public class JwtResponse {
     private String token;
     private String id;
     private String username;
+    private String role;
 
-    public JwtResponse(String token, String id, String username) {
+    public JwtResponse(String token, String id, String username,String role) {
         this.token = token;
         this.id = id;
         this.username = username;
+        this.role=role;
     }
 
     // Getters and Setters
@@ -40,4 +41,11 @@ public class JwtResponse {
         this.username= username;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
