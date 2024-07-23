@@ -28,6 +28,8 @@ public class Employe {
     private String role; // Ajouter le rôle ici
     private SoldeConges solde_conges;
 
+    public Employe() {
+    }
     // Constructeurs, getters, et setters
     public Employe(String nom, String prenom, String email, String mot_de_passe, String role) {
         this.nom = nom;
@@ -35,6 +37,12 @@ public class Employe {
         this.email = email;
         this.mot_de_passe = mot_de_passe;
         this.role = role; // Initialiser le rôle
+    }
+
+    public Employe(String username, String email, String encode) {
+        this.username = username;
+        this.email = email;
+        this.mot_de_passe = encode;
     }
 
 

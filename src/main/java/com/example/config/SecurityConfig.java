@@ -35,7 +35,6 @@ public class SecurityConfig {
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
-
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
@@ -88,6 +87,9 @@ public class SecurityConfig {
                                 .requestMatchers("/api/pdf/generate").permitAll()
                                 .requestMatchers("/api/salarier/**").permitAll()
                                 .requestMatchers("/api/leave-requests").permitAll()
+                                .requestMatchers("/api/leave-requests/{id}/reject").permitAll()
+                                .requestMatchers("/api/leave-requests/{id}/approve").permitAll()
+                                .requestMatchers("/api/leave-request").permitAll()
                                 .requestMatchers("/api/test-cors").permitAll()
                                 .requestMatchers("/api/leave-requests/{id}/pdf").permitAll()
                                 .requestMatchers("/api/me").authenticated() // Assurer que seul les utilisateurs authentifiés peuvent accéder à /api/me

@@ -12,6 +12,7 @@ import java.util.Date;
 public class LeaveRequest {
     @Id
     private String id;
+    private String username;
     private String emplnom;
     private String emplprenom;
     private String emplCIN;
@@ -23,16 +24,17 @@ public class LeaveRequest {
     private Date endDate;
     private String status;
     private String Remarque;
-    private String NbrJourCong;
+    private int NbrJourCong;
     private Date DateDemande;
     private Date DateValidation;
 
     public LeaveRequest() {}
 
-    public LeaveRequest(String id,String emplnom,String emplprenom, String emplCIN,String departemant,
+    public LeaveRequest(String id,String username,String emplnom,String emplprenom, String emplCIN,String departemant,
                         String Email,String Tele,String type, Date startDate
-            , Date endDate, String status,String Remarque,String NbrJourCong,Date DateDemande,Date DateValidation) {
+            , Date endDate, String status,String Remarque,int NbrJourCong,Date DateDemande,Date DateValidation) {
         this.id = id;
+        this.username = username;
         this.emplnom = emplnom;
         this.emplprenom = emplprenom;
         this.emplCIN = emplCIN;
@@ -51,6 +53,14 @@ public class LeaveRequest {
 
     public String getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setId(String id) {
@@ -145,11 +155,11 @@ public class LeaveRequest {
         Remarque = remarque;
     }
 
-    public String getNbrJourCong() {
+    public int getNbrJourCong() {
         return NbrJourCong;
     }
 
-    public void setNbrJourCong(String nbrJourCong) {
+    public void setNbrJourCong(int nbrJourCong) {
         NbrJourCong = nbrJourCong;
     }
 

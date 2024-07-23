@@ -8,10 +8,10 @@ public class PasswordCheck {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         // Hash de la base de données
-        String storedHash = "$2a$10$9k./f28eo20CdMlXJtoeA.AtYvvI1esyV1YLU1uu16PVfmtitMycW";
+        String storedHash = "$2a$10$aMcMyo8jUjBd71uIjKcH3OXWr8FtqPe2vhhoDm.2UlInYyqZ9uCZS";
 
         // Mot de passe que vous voulez vérifier
-        String rawPassword = "adnanebissasse1997";
+        String rawPassword = "doaabissasse2002";
 
         // Vérifiez si le mot de passe correspond au hash
         boolean matches = encoder.matches(rawPassword, storedHash);
