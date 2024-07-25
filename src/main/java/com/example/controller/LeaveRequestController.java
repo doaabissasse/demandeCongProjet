@@ -6,18 +6,18 @@ import com.example.resources.Employe;
 import com.example.resources.LeaveRequest;
 import com.example.service.PDFService;
 import com.example.service.UserDetailsImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @RestController
 @RequestMapping("/api")
@@ -41,8 +41,46 @@ public class LeaveRequestController {
 
     @Autowired
     private EmployeRepository employeRepository;
+    private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+
 
     private static final Logger logger = LoggerFactory.getLogger(LeaveRequestController.class);
+
+    @Autowired
+    private NotificationService notificationService;
+    @PutMapping("/leave-requests/{id}/accept")
+    public ResponseEntity<String> acceptLeaveRequest(@PathVariable String id) {
+        Optional<LeaveRequest> optionalLeaveRequest = leaveRequestRepository.findById(id);
+        if (!optionalLeaveRequest.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        LeaveRequest leaveRequest = optionalLeaveRequest.get();
+        leaveRequest.setStatus("approuvé");
+        leaveRequest.setDateValidation(new Date());
+        leaveRequestRepository.save(leaveRequest);
+
+        // Envoyer une réponse avec un message de notification
+        String notificationMessage = "Votre demande de congé a été approuvée.";
+        return ResponseEntity.ok(notificationMessage);
+    }
+
+    @PutMapping("/leave-requests/{id}/refuse")
+    public ResponseEntity<String> refuseLeaveRequest(@PathVariable String id) {
+        Optional<LeaveRequest> optionalLeaveRequest = leaveRequestRepository.findById(id);
+        if (!optionalLeaveRequest.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        LeaveRequest leaveRequest = optionalLeaveRequest.get();
+        leaveRequest.setStatus("refusé");
+        leaveRequest.setDateValidation(new Date());
+        leaveRequestRepository.save(leaveRequest);
+
+        // Envoyer une réponse avec un message de notification
+        String notificationMessage = "Votre demande de congé a été refusée.";
+        return ResponseEntity.ok(notificationMessage);
+    }
 
     @PostMapping("/leave-requests")
     public ResponseEntity<?> createLeaveRequest(@RequestBody LeaveRequest leaveRequest) {
@@ -122,7 +160,11 @@ public class LeaveRequestController {
         return leaveRequests;
     }
 
-
+    @PostMapping("/signout")
+    public ResponseEntity<Void> signout(HttpServletRequest request) {
+        // Invalidate the token or perform server-side cleanup if necessary
+        return ResponseEntity.ok().build();
+    }
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/leave-requests/{id}/pdf")
     public ResponseEntity<byte[]> generateLeaveRequestPDF(@PathVariable String id) {
@@ -229,10 +271,35 @@ public class LeaveRequestController {
     }
 
 
+
+
+
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/test-cors")
     public ResponseEntity<String> testCors() {
         return ResponseEntity.ok("CORS is working!");
+    }
+
+
+    @GetMapping(value = "/events")
+    public SseEmitter streamEvents() {
+        SseEmitter emitter = new SseEmitter();
+        emitters.add(emitter);
+
+        emitter.onCompletion(() -> emitters.remove(emitter));
+        emitter.onTimeout(() -> emitters.remove(emitter));
+
+        return emitter;
+    }
+
+    public void notifyEmitters(LeaveRequest leaveRequest) {
+        for (SseEmitter emitter : emitters) {
+            try {
+                emitter.send(SseEmitter.event().name("statusChanged").data(leaveRequest));
+            } catch (IOException e) {
+                emitter.completeWithError(e);
+            }
+        }
     }
 
 }

@@ -85,13 +85,18 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/pdf/generate").permitAll()
+                                .requestMatchers("/api/signout").permitAll()
+                                .requestMatchers("/api/events").permitAll()
                                 .requestMatchers("/api/salarier/**").permitAll()
                                 .requestMatchers("/api/leave-requests").permitAll()
+                                .requestMatchers("/api/leave-requests/user/{id}").permitAll()
                                 .requestMatchers("/api/leave-requests/{id}/reject").permitAll()
                                 .requestMatchers("/api/leave-requests/{id}/approve").permitAll()
                                 .requestMatchers("/api/leave-request").permitAll()
                                 .requestMatchers("/api/test-cors").permitAll()
                                 .requestMatchers("/api/leave-requests/{id}/pdf").permitAll()
+                                .requestMatchers("/api/leave-requests/{id}/refuse").permitAll()
+                                .requestMatchers("/api/leave-requests/{id}/accept").permitAll()
                                 .requestMatchers("/api/me").authenticated() // Assurer que seul les utilisateurs authentifiés peuvent accéder à /api/me
                                 .anyRequest().authenticated()
                 )

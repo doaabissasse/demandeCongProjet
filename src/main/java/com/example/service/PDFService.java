@@ -82,6 +82,8 @@ public class PDFService {
             Paragraph letterBody = new Paragraph();
             letterBody.add(new Phrase("Madame, Monsieur,\n\n", bodyFont));
             letterBody.add(new Phrase("Par la présente, je souhaite solliciter un congé de ", bodyFont));
+            letterBody.add(new Phrase(leaveRequest.getType(), grayFont)); // Ajout du type de congé
+            letterBody.add(new Phrase(" pour une durée de ", bodyFont)); // Ajustement de la phrase pour inclure la durée
             letterBody.add(new Phrase(String.valueOf(leaveRequest.getNbrJourCong()), grayFont));
             letterBody.add(new Phrase(" jours, à compter du ", bodyFont));
             letterBody.add(new Phrase(sdf.format(leaveRequest.getStartDate()), grayFont));
