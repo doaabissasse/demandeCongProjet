@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.config.jwt.JwtUtils;
 import com.example.repository.EmployeRepository;
 import com.example.repository.LeaveRequestRepository;
 import com.example.resources.Employe;
@@ -17,15 +18,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @RestController
@@ -41,13 +41,14 @@ public class LeaveRequestController {
 
     @Autowired
     private EmployeRepository employeRepository;
+
+    @Autowired
+    private JwtUtils jwtUtils;
     private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
 
     private static final Logger logger = LoggerFactory.getLogger(LeaveRequestController.class);
 
-    @Autowired
-    private NotificationService notificationService;
     @PutMapping("/leave-requests/{id}/accept")
     public ResponseEntity<String> acceptLeaveRequest(@PathVariable String id) {
         Optional<LeaveRequest> optionalLeaveRequest = leaveRequestRepository.findById(id);
@@ -270,19 +271,12 @@ public class LeaveRequestController {
         return ResponseEntity.ok().build();
     }
 
-
-
-
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/test-cors")
-    public ResponseEntity<String> testCors() {
-        return ResponseEntity.ok("CORS is working!");
-    }
-
-
     @GetMapping(value = "/events")
-    public SseEmitter streamEvents() {
+    public SseEmitter streamEvents(@RequestParam String token) {
+        if (!jwtUtils.validateJwtToken(token)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token invalide");
+        }
+
         SseEmitter emitter = new SseEmitter();
         emitters.add(emitter);
 
@@ -292,15 +286,21 @@ public class LeaveRequestController {
         return emitter;
     }
 
-    public void notifyEmitters(LeaveRequest leaveRequest) {
-        for (SseEmitter emitter : emitters) {
-            try {
-                emitter.send(SseEmitter.event().name("statusChanged").data(leaveRequest));
-            } catch (IOException e) {
-                emitter.completeWithError(e);
-            }
-        }
+    @GetMapping("/dashboard/leave-request-count")
+    public ResponseEntity<?> getLeaveRequestCounts() {
+        long countPaid = leaveRequestRepository.countByType("payé");
+        long countNonPaid = leaveRequestRepository.countByType("non_payé");
+        long countSick = leaveRequestRepository.countByType("maladie");
+
+        Map<String, Long> counts = new HashMap<>();
+        counts.put("payé", countPaid);
+        counts.put("non_payé", countNonPaid);
+        counts.put("maladie", countSick);
+
+        return ResponseEntity.ok(counts);
     }
+
+
 
 }
 

@@ -14,4 +14,6 @@ public interface EmployeRepository extends MongoRepository<Employe, String> {
     boolean existsByEmail(String email);
 
     Optional<Employe> findByUsername(String username);
+
+    long countByRole(String role);
 }

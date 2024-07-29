@@ -11,4 +11,6 @@ import java.util.Optional;
 @Repository
 public interface LeaveRequestRepository extends MongoRepository<LeaveRequest, String> {
     List<LeaveRequest> findByUsername(String username);
+
+    long countByType(String type);
 }

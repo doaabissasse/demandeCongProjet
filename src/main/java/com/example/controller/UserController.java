@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.repository.EmployeRepository;
 import com.example.resources.Employe;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,5 +32,10 @@ public class UserController {
         Employe employe = employeRepository.findByUsername(username).orElse(null);
         System.out.println("Employe found: " + employe);
         return employe;
+    }
+    @GetMapping("/dashboard/employee-count")
+    public ResponseEntity<?> getEmployeeCountByRole( String role) {
+        long count = employeRepository.countByRole(role);
+        return ResponseEntity.ok(count);
     }
 }

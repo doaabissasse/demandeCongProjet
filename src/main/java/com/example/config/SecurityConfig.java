@@ -86,6 +86,8 @@ public class SecurityConfig {
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/pdf/generate").permitAll()
                                 .requestMatchers("/api/signout").permitAll()
+                                .requestMatchers("/api/dashboard/employee-count").permitAll()
+                                .requestMatchers("/api/dashboard/leave-request-count").permitAll()
                                 .requestMatchers("/api/events").permitAll()
                                 .requestMatchers("/api/salarier/**").permitAll()
                                 .requestMatchers("/api/leave-requests").permitAll()

@@ -10,12 +10,12 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class UserDetailsImpl implements UserDetails {
-    private ObjectId id;
+    private String id;
     private String username;
     private String password;
     private GrantedAuthority authority;
 
-    public UserDetailsImpl(ObjectId id, String username, String password, GrantedAuthority authority) {
+    public UserDetailsImpl(String id, String username, String password, GrantedAuthority authority) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -67,7 +67,7 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 

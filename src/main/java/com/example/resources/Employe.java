@@ -5,12 +5,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
 
 @Document(collection = "salarier")
 public class Employe {
     @Id
-    private ObjectId id;
+    private String id;
     private String username;
     private String nom;
     private String prenom;
@@ -57,11 +56,11 @@ public class Employe {
 
 
     // Getters et setters
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
