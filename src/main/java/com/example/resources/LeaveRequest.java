@@ -27,6 +27,7 @@ public class LeaveRequest {
     private int NbrJourCong;
     private Date DateDemande;
     private Date DateValidation;
+    private boolean supervisorApproved;
 
     public LeaveRequest() {}
 
@@ -49,6 +50,7 @@ public class LeaveRequest {
         this.NbrJourCong = NbrJourCong;
         this.DateDemande = DateDemande;
         this.DateValidation = DateValidation;
+        this. supervisorApproved =  false;
     }
 
     public String getId() {
@@ -177,5 +179,13 @@ public class LeaveRequest {
 
     public void setDateValidation(Date dateValidation) {
         DateValidation = dateValidation;
+    }
+
+    public boolean isSupervisorApproved() {
+        return supervisorApproved;
+    }
+
+    public void setSupervisorApproved(boolean supervisorApproved) {
+        this.supervisorApproved = supervisorApproved;
     }
 }

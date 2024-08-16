@@ -89,9 +89,11 @@ public class PDFService {
             document.add(letterBody);
             document.add(new Paragraph("\n"));
 
-            // Ajout de la date de validation
+            // Obtenez la date de validation
             Date validationDate = leaveRequest.getDateValidation();
-            String validationDateStr = (validationDate != null) ? sdf.format(validationDate) : "Date de validation:";
+            String validationDateStr = (validationDate != null)
+                    ? "Date de validation: " + sdf.format(validationDate)
+                    : "Date de validation";
             Paragraph validationDateParagraph = new Paragraph(validationDateStr, bodyFont);
             document.add(validationDateParagraph);
             document.add(new Paragraph("\n\n"));

@@ -3,13 +3,15 @@ package com.example.controller;
 import com.example.repository.EmployeRepository;
 import com.example.resources.Employe;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -37,5 +39,31 @@ public class UserController {
     public ResponseEntity<?> getEmployeeCountByRole( String role) {
         long count = employeRepository.countByRole(role);
         return ResponseEntity.ok(count);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Employe> getEmployeeById(@PathVariable String id) {
+        Optional<Employe> employee = employeRepository.findById(id);
+        if (employee.isPresent()) {
+            return ResponseEntity.ok(employee.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+    @GetMapping("/employees")
+    public ResponseEntity<List<Employe>> getEmployeesByRoleAndSearch(
+            @RequestParam(required = false) String role,
+            @RequestParam(required = false) String search) {
+
+        List<Employe> employees;
+
+        if (search != null && !search.isEmpty()) {
+            employees = employeRepository.findByRoleAndNomContainingIgnoreCaseOrRoleAndPrenomContainingIgnoreCaseOrRoleAndEmailContainingIgnoreCase(role, search, role, search, role, search);
+        } else if (role != null && !role.isEmpty()) {
+            employees = employeRepository.findByRole(role);
+        } else {
+            employees = employeRepository.findAll();
+        }
+
+        return ResponseEntity.ok(employees);
     }
 }

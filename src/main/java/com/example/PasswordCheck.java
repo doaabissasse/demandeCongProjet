@@ -7,14 +7,15 @@ public class PasswordCheck {
         // Créez une instance de BCryptPasswordEncoder
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        // Hash de la base de données
-        String storedHash = "$2a$10$aMcMyo8jUjBd71uIjKcH3OXWr8FtqPe2vhhoDm.2UlInYyqZ9uCZS";
+        // Mot de passe brut que vous voulez hacher
+        String rawPassword = "aymenloudiy1995";
 
-        // Mot de passe que vous voulez vérifier
-        String rawPassword = "doaabissasse2002";
+        // Hachez le mot de passe
+        String hashedPassword = encoder.encode(rawPassword);
 
-        // Vérifiez si le mot de passe correspond au hash
-        boolean matches = encoder.matches(rawPassword, storedHash);
+        // Affichez le mot de passe haché
+        System.out.println("Mot de passe haché : " + hashedPassword);
+        boolean matches = encoder.matches(rawPassword, hashedPassword);
 
         // Affichez le résultat
         if (matches) {
@@ -24,3 +25,4 @@ public class PasswordCheck {
         }
     }
 }
+

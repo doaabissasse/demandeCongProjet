@@ -13,4 +13,6 @@ public interface LeaveRequestRepository extends MongoRepository<LeaveRequest, St
     List<LeaveRequest> findByUsername(String username);
 
     long countByType(String type);
+
+    List<LeaveRequest> findByUsernameAndStatus(String username, String status);
 }

@@ -137,30 +137,6 @@ public class LeaveRequestController {
         return leaveRequests;
     }
 
-    @GetMapping("/leave-request")
-    public List<LeaveRequest> getCurrentLeaveRequests() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-
-        String username;
-        if (principal instanceof UserDetailsImpl) {
-            username = ((UserDetailsImpl) principal).getUsername();
-        } else if (principal instanceof String) {
-            username = (String) principal;
-        } else {
-            throw new IllegalStateException("Unexpected principal type: " + principal.getClass());
-        }
-
-        // Log the username of the authenticated user
-        logger.info("Authenticated user username: {}", username);
-
-        // Retrieve the leave request details from the database
-        List<LeaveRequest> leaveRequests = leaveRequestRepository.findByUsername(username);
-        logger.info("LeaveRequests found: {}", leaveRequests);
-
-        return leaveRequests;
-    }
-
     @PostMapping("/signout")
     public ResponseEntity<Void> signout(HttpServletRequest request) {
         // Invalidate the token or perform server-side cleanup if necessary
@@ -188,6 +164,7 @@ public class LeaveRequestController {
                     .body(("Error generating PDF: " + e.getMessage()).getBytes());
         }
     }
+
 
     @PutMapping("/leave-requests/{id}/approve")
     public ResponseEntity<?> approveLeaveRequest(@PathVariable String id) {
@@ -299,7 +276,64 @@ public class LeaveRequestController {
 
         return ResponseEntity.ok(counts);
     }
+    @PutMapping("/leave-requests/{id}/admin-approve")
+    public ResponseEntity<?> supervisorApproveRequest(@PathVariable String id) {
+        Optional<LeaveRequest> leaveRequestOptional = leaveRequestRepository.findById(id);
+        if (!leaveRequestOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        LeaveRequest leaveRequest = leaveRequestOptional.get();
+        leaveRequest.setSupervisorApproved(true);
+        leaveRequestRepository.save(leaveRequest);
+        return ResponseEntity.ok().build();
 
+    }
+    @GetMapping("/leave-request")
+    public List<LeaveRequest> getCurrentLeaveRequests() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+
+        String username;
+        if (principal instanceof UserDetailsImpl) {
+            username = ((UserDetailsImpl) principal).getUsername();
+        } else if (principal instanceof String) {
+            username = (String) principal;
+        } else {
+            throw new IllegalStateException("Unexpected principal type: " + principal.getClass());
+        }
+
+        // Log the username of the authenticated user
+        logger.info("Authenticated user username: {}", username);
+
+        // Retrieve the leave request details from the database
+        List<LeaveRequest> leaveRequests = leaveRequestRepository.findByUsername(username);
+        logger.info("LeaveRequests found: {}", leaveRequests);
+
+        return leaveRequests;
+    }
+    @GetMapping("/employee/{username}/leave-requests")
+    public ResponseEntity<List<LeaveRequest>> getLeaveRequestsByUsernameAndStatus(
+            @PathVariable String username,
+            @RequestParam Optional<String> status) {
+        List<LeaveRequest> leaveRequests;
+        if (status.isPresent()) {
+            leaveRequests = leaveRequestRepository.findByUsernameAndStatus(username, status.get());
+        } else {
+            leaveRequests = leaveRequestRepository.findByUsername(username);
+        }
+        return ResponseEntity.ok(leaveRequests);
+    }
+    @GetMapping("/leave-requests/employee/{employeeId}")
+    public ResponseEntity<List<LeaveRequest>> getLeaveRequestsByEmployeeId(@PathVariable String employeeId) {
+        Optional<Employe> optionalEmploye = employeRepository.findById(employeeId);
+        if (!optionalEmploye.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Employe employe = optionalEmploye.get();
+        List<LeaveRequest> leaveRequests = leaveRequestRepository.findByUsername(employe.getUsername());
+        return ResponseEntity.ok(leaveRequests);
+    }
 
 
 }
