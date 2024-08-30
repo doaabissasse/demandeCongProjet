@@ -8,7 +8,7 @@ public class PasswordCheck {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         // Mot de passe brut que vous voulez hacher
-        String rawPassword = "aymenloudiy1995";
+        String rawPassword = "doaabissasse2002";
 
         // Hachez le mot de passe
         String hashedPassword = encoder.encode(rawPassword);
